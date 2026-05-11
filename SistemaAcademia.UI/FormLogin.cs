@@ -1,4 +1,5 @@
 using SistemaAcademia.BLL.Auth;
+using SistemaAcademia.BLL.Catraca;
 using SistemaAcademia.Models;
 using System;
 using System.Windows.Forms;
@@ -40,8 +41,18 @@ namespace SistemaAcademia.UI
                 }
                 else
                 {
-                    MessageBox.Show($"Bem-vindo(a), {usuarioLogado.Nome}! Vá para a catraca.", "Acesso Liberado", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    // Aqui você poderia abrir um FormCliente, se tiver.
+                    CatracaBLL catracaBLL = new CatracaBLL();
+                    bool liberado = catracaBLL.VerificarAcessoCatraca(usuarioLogado.Cpf);
+
+                    if (liberado)
+                    {
+                        MessageBox.Show($"Bem-vindo(a), {usuarioLogado.Nome}! Catraca liberada. Bom treino!", "Acesso Liberado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show($"Acesso barrado para {usuarioLogado.Nome}. Você precisa regularizar o pagamento com a administração antes de acessar a academia.", "Acesso Bloqueado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+
                     txtUsuario.Text = "";
                     txtSenha.Text = "";
                 }
