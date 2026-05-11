@@ -62,7 +62,7 @@ namespace SistemaAcademia.UI
                 }
                 else
                 {
-                    MessageBox.Show("CEP não encontrado ou inválido.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("CEP não existente.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             catch (Exception ex)

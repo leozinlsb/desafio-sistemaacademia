@@ -29,6 +29,12 @@ namespace SistemaAcademia.BLL.Services
             if (response.IsSuccessStatusCode)
             {
                 string json = await response.Content.ReadAsStringAsync();
+                
+                if (json.Contains("\"erro\""))
+                {
+                    return new EnderecoViaCep { Erro = true };
+                }
+
                 var endereco = JsonSerializer.Deserialize<EnderecoViaCep>(json);
                 return endereco;
             }
