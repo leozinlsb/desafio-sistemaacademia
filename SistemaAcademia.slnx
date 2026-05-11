@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="SistemaAcademia.BLL/SistemaAcademia.BLL.csproj" />
+  <Project Path="SistemaAcademia.DAL/SistemaAcademia.DAL.csproj" />
+  <Project Path="SistemaAcademia.Models/SistemaAcademia.Models.csproj" />
+  <Project Path="SistemaAcademia.UI/SistemaAcademia.UI.csproj" Id="dbb989d8-d39c-4621-8a2a-8226b8b0c7e1" />
+</Solution>
