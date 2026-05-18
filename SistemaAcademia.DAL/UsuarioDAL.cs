@@ -10,7 +10,6 @@ namespace SistemaAcademia.DAL
         {
             using (var connection = ConnectionHelper.GetConnection())
             {
-                // Atualiza apenas os dados permitidos (nunca atualizamos o CPF ou o Login para manter a integridade)
                 string query = @"UPDATE Usuario 
                          SET Nome = @Nome, 
                              Telefone = @Telefone, 
@@ -44,15 +43,11 @@ namespace SistemaAcademia.DAL
         {
             using (var connection = ConnectionHelper.GetConnection())
             {
-                // Deleta o usuário pelo Id. 
-                // Como você usou 'ON DELETE CASCADE' na tabela de pagamentos no script DDL, 
-                // os pagamentos desse aluno serão apagados automaticamente!
                 string query = "DELETE FROM Usuario WHERE Id = @Id";
 
                 using (var command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@Id", id);
-
                     connection.Open();
                     command.ExecuteNonQuery();
                 }
@@ -95,6 +90,7 @@ namespace SistemaAcademia.DAL
                 {
                     command.Parameters.AddWithValue("@Login", login);
                     connection.Open();
+
                     using (var reader = command.ExecuteReader())
                     {
                         if (reader.Read())
@@ -141,7 +137,6 @@ namespace SistemaAcademia.DAL
                     {
                         if (reader.Read())
                         {
-                            // Reaproveita o seu método mapeador que já está pronto!
                             return MapReaderToUsuario(reader);
                         }
                     }
@@ -170,7 +165,5 @@ namespace SistemaAcademia.DAL
                 DataCadastro = Convert.ToDateTime(reader["DataCadastro"])
             };
         }
-
-
     }
 }

@@ -18,7 +18,6 @@ namespace SistemaAcademia.BLL.Services
 
         public async Task<EnderecoViaCep> BuscarEnderecoPorCepAsync(string cep)
         {
-            // Remove o traço para a API
             string cepLimpo = cep.Replace("-", "").Trim();
             
             if (cepLimpo.Length != 8)

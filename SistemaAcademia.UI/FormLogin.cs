@@ -18,7 +18,6 @@ namespace SistemaAcademia.UI
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            // Validação básica da tela
             if (string.IsNullOrWhiteSpace(txtUsuario.Text) || string.IsNullOrWhiteSpace(txtSenha.Text))
             {
                 MessageBox.Show("Preencha usuário e senha.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -28,15 +27,13 @@ namespace SistemaAcademia.UI
             try
             {
                 AuthBLL authBLL = new AuthBLL();
-
-                // Tenta autenticar.
                 Usuario usuarioLogado = authBLL.Autenticar(txtUsuario.Text, txtSenha.Text);
 
                 if (usuarioLogado.IsAdmin)
                 {
                     FormAdmin telaAdmin = new FormAdmin();
                     telaAdmin.Show();
-                    this.Hide(); // Esconde a tela de login apenas para admin
+                    this.Hide();
                 }
                 else
                 {

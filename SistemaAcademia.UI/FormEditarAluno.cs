@@ -18,7 +18,6 @@ namespace SistemaAcademia.UI
             _authBLL = new AuthBLL();
             _viaCepService = new ViaCepService();
             _usuarioEdicao = usuario;
-
             PreencherCampos();
         }
 
@@ -50,7 +49,6 @@ namespace SistemaAcademia.UI
             try
             {
                 btnBuscarCep.Enabled = false;
-
                 var endereco = await _viaCepService.BuscarEnderecoPorCepAsync(txtCep.Text);
 
                 if (endereco != null && !endereco.Erro)

@@ -14,7 +14,6 @@ namespace SistemaAcademia.DAL
         {
             DataTable dtVisaoGeral = new DataTable();
 
-            // A famosa query com LEFT JOIN ajustada para a sua tabela Usuario
             string query = @"
                 SELECT 
                     U.Id, 
@@ -35,7 +34,6 @@ namespace SistemaAcademia.DAL
                 using (var command = new SqlCommand(query, connection))
                 {
                     connection.Open();
-                    // O SqlDataAdapter é perfeito para preencher DataTables automaticamente
                     using (var adapter = new SqlDataAdapter(command))
                     {
                         adapter.Fill(dtVisaoGeral);

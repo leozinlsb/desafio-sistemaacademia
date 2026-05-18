@@ -21,13 +21,9 @@ namespace SistemaAcademia.BLL.Catraca
         {
             CatracaDAL dal = new CatracaDAL();
 
-            // 1. Verifica no banco se tem pagamento
             bool temPagamento = dal.VerificarPagamentoAtivo(cpf);
-
-            // 2. Registra o log (histórico de entrada) se passou ou se foi bloqueado
             dal.RegistrarLogAcesso(cpf, temPagamento);
 
-            // 3. Retorna o resultado para a tela piscar Verde (true) ou Vermelho (false)
             return temPagamento;
         }
     }

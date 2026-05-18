@@ -17,12 +17,12 @@ namespace SistemaAcademia.DAL
                 {
                     command.Parameters.AddWithValue("@UsuarioId", usuarioId);
                     command.Parameters.AddWithValue("@Valor", valor);
-
                     connection.Open();
                     command.ExecuteNonQuery();
                 }
             }
         }
+
         public bool VerificarPagamentoMesVigente(int usuarioId, int mes, int ano)
         {
             using (var connection = ConnectionHelper.GetConnection())
@@ -33,13 +33,13 @@ namespace SistemaAcademia.DAL
                     command.Parameters.AddWithValue("@UsuarioId", usuarioId);
                     command.Parameters.AddWithValue("@Mes", mes);
                     command.Parameters.AddWithValue("@Ano", ano);
-                    
                     connection.Open();
                     int count = Convert.ToInt32(command.ExecuteScalar());
                     return count > 0;
                 }
             }
         }
+
         public void RegistrarPagamento(Pagamento pagamento)
         {
             using (var connection = ConnectionHelper.GetConnection())
@@ -53,7 +53,6 @@ namespace SistemaAcademia.DAL
                     command.Parameters.AddWithValue("@DataPagamento", pagamento.DataPagamento);
                     command.Parameters.AddWithValue("@MesReferencia", pagamento.MesReferencia);
                     command.Parameters.AddWithValue("@AnoReferencia", pagamento.AnoReferencia);
-                    
                     connection.Open();
                     command.ExecuteNonQuery();
                 }

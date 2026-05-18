@@ -14,7 +14,6 @@ namespace SistemaAcademia.BLL.Validations
         public static bool ValidarTelefone(string telefone)
         {
             if (string.IsNullOrWhiteSpace(telefone)) return false;
-            // Valida formatos como (XX) XXXXX-XXXX ou (XX) XXXX-XXXX
             string padrao = @"^\(\d{2}\) \d{4,5}-\d{4}$";
             return Regex.IsMatch(telefone, padrao);
         }
@@ -22,7 +21,6 @@ namespace SistemaAcademia.BLL.Validations
         public static bool ValidarCep(string cep)
         {
             if (string.IsNullOrWhiteSpace(cep)) return false;
-            // Valida formato XXXXX-XXX
             string padrao = @"^\d{5}-\d{3}$";
             return Regex.IsMatch(cep, padrao);
         }

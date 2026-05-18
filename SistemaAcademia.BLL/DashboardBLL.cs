@@ -1,4 +1,4 @@
-﻿using SistemaAcademia.DAL;
+using SistemaAcademia.DAL;
 using System;
 using System.Collections.Generic;
 using System.Data;

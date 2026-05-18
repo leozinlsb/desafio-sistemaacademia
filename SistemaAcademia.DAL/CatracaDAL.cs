@@ -10,7 +10,6 @@ namespace SistemaAcademia.DAL
         {
             using (var connection = ConnectionHelper.GetConnection())
             {
-                // Busca o ID do usuário pelo CPF primeiro
                 string query = @"
                     DECLARE @UsuarioId INT;
                     SELECT @UsuarioId = Id FROM Usuario WHERE Cpf = @Cpf;
@@ -31,6 +30,7 @@ namespace SistemaAcademia.DAL
                 }
             }
         }
+
         public bool VerificarPagamentoAtivo(string cpf)
         {
             using (var connection = ConnectionHelper.GetConnection())
@@ -49,7 +49,7 @@ namespace SistemaAcademia.DAL
                     connection.Open();
 
                     int pagamentosEncontrados = Convert.ToInt32(command.ExecuteScalar());
-                    return pagamentosEncontrados > 0; // Se for maior que 0, está pago!
+                    return pagamentosEncontrados > 0;
                 }
             }
         }

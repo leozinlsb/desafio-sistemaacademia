@@ -12,7 +12,7 @@ namespace SistemaAcademia.UI
     {
         private PagamentoBLL _pagamentoBLL;
         private CatracaBLL _catracaBLL;
-        private DashboardBLL _dashboardBLL; // Adicionado para manter a arquitetura
+        private DashboardBLL _dashboardBLL;
 
         public FormAdmin()
         {
@@ -31,10 +31,7 @@ namespace SistemaAcademia.UI
         {
             try
             {
-                // A UI pede para a BLL, respeitando as 3 camadas
                 dgvAlunos.DataSource = _dashboardBLL.ListarVisaoGeralAlunos();
-
-                // Estilização opcional para a grid não ficar "espremida"
                 dgvAlunos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                 dgvAlunos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
                 dgvAlunos.MultiSelect = false;
@@ -72,7 +69,7 @@ namespace SistemaAcademia.UI
                 {
                     _pagamentoBLL.RegistrarPagamentoMesVigente(usuarioId, 100m);
                     MessageBox.Show("Pagamento registrado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    CarregarDados(); // Recarrega a grid para mostrar a nova data
+                    CarregarDados();
                 }
                 catch (Exception ex)
                 {
@@ -146,18 +143,15 @@ namespace SistemaAcademia.UI
 
         private void btnExcluir_Click(object sender, EventArgs e)
         {
-            // Verifica se tem alguma linha selecionada na Grid
             if (dgvAlunos.SelectedRows.Count == 0)
             {
                 MessageBox.Show("Selecione um aluno na lista para excluir.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            // Pega o ID e o Nome da linha selecionada
             int idSelecionado = Convert.ToInt32(dgvAlunos.SelectedRows[0].Cells["Id"].Value);
             string nomeSelecionado = dgvAlunos.SelectedRows[0].Cells["Nome"].Value.ToString();
 
-            // Pergunta de segurança para não apagar sem querer
             var confirmacao = MessageBox.Show($"Tem certeza que deseja excluir permanentemente o aluno {nomeSelecionado}?",
                                               "Confirmar Exclusão", MessageBoxButtons.YesNo, MessageBoxIcon.Stop);
 
@@ -165,13 +159,9 @@ namespace SistemaAcademia.UI
             {
                 try
                 {
-                    // O ideal seria instanciar isso no construtor do Form, como fizemos com as outras BLLs
                     AuthBLL bll = new AuthBLL();
                     bll.ExcluirUsuario(idSelecionado);
-
                     MessageBox.Show("Aluno excluído com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    // Recarrega a Grid para o aluno sumir da tela
                     CarregarDados();
                 }
                 catch (Exception ex)
@@ -180,10 +170,11 @@ namespace SistemaAcademia.UI
                 }
             }
         }
+
         private void btnVoltarLogin_Click(object sender, EventArgs e)
         {
-            // Oculta o FormAdmin e mostra as instâncias abertas de FormLogin
             this.Close();
+
             foreach (Form form in Application.OpenForms)
             {
                 if (form is FormLogin)
