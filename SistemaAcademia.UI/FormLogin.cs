@@ -32,7 +32,6 @@ namespace SistemaAcademia.UI
                 // Tenta autenticar.
                 Usuario usuarioLogado = authBLL.Autenticar(txtUsuario.Text, txtSenha.Text);
 
-                // Opcional: Se tiver telas diferentes para Admin e Cliente
                 if (usuarioLogado.IsAdmin)
                 {
                     FormAdmin telaAdmin = new FormAdmin();
